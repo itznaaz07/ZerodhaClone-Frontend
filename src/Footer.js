@@ -17,9 +17,9 @@ function Footer() {
 </div>
 <hr className='text-muted'></hr>
   <div className="mt-4 d-flex gap-3 text-muted" style={{fontSize:'20px'}}>
-    <i class="fa-brands fa-youtube" ></i>
-    <i class="fa-brands fa-whatsapp"></i>
-    <i class="fa-brands fa-telegram"></i>
+    <i className="fa-brands fa-youtube" ></i>
+    <i className="fa-brands fa-whatsapp"></i>
+    <i className="fa-brands fa-telegram"></i>
 </div>
 
              
