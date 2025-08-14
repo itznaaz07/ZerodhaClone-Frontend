@@ -18,7 +18,7 @@ import Notfound from './Notfound';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AuthProvider>  {/* Wrap here */}
+  <AuthProvider>  
     <BrowserRouter>
       <Navbar />
       <Routes>

@@ -1,9 +1,10 @@
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./AuthForm.css";
+
 const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3002";
 
 const Signup = () => {
@@ -13,52 +14,50 @@ const Signup = () => {
     password: "",
     username: "",
   });
+
   const { email, password, username } = inputValue;
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    setInputValue({
-      ...inputValue,
-      [name]: value,
-    });
+    setInputValue((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
-  const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-right",
-    });
+  const handleError = (msg) => toast.error(msg, { position: "bottom-left" });
+  const handleSuccess = (msg) => toast.success(msg, { position: "bottom-right" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email || !username || !password) {
+      handleError("Please fill all fields");
+      return;
+    }
+
     try {
       const { data } = await axios.post(
         `${apiUrl}/signup`,
-        {
-          ...inputValue,
-        },
+        inputValue,
         { withCredentials: true }
       );
-      const { success, message } = data;
-      if (success) {
-        handleSuccess(message);
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
+
+      if (data.success) {
+        handleSuccess(data.message);
+        setInputValue({ email: "", username: "", password: "" });
+       if (data.success) {
+  handleSuccess(data.message);
+  localStorage.setItem("token", data.token); // optional
+  setTimeout(() => {
+    window.location.href = "https://zerodhaclone-dashboard-ka6o.onrender.com"; // full URL
+  }, 1000);
+}
+
       } else {
-        handleError(message);
+        handleError(data.message);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.error("Signup error:", err);
+      handleError(err.response?.data?.message || "Signup failed");
     }
-    setInputValue({
-      ...inputValue,
-      email: "",
-      password: "",
-      username: "",
-    });
   };
 
   return (
@@ -66,7 +65,7 @@ const Signup = () => {
       <h2>Signup Account</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
+          <label>Email</label>
           <input
             type="email"
             name="email"
@@ -76,7 +75,7 @@ const Signup = () => {
           />
         </div>
         <div>
-          <label htmlFor="email">Username</label>
+          <label>Username</label>
           <input
             type="text"
             name="username"
@@ -86,7 +85,7 @@ const Signup = () => {
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label>Password</label>
           <input
             type="password"
             name="password"
@@ -95,9 +94,9 @@ const Signup = () => {
             onChange={handleOnChange}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Signup</button>
         <span>
-          Already have an account? <Link to={"/login"}>Login</Link>
+          Already have an account? <Link to="/login">Login</Link>
         </span>
       </form>
       <ToastContainer />

@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "./context/AuthContext"; // Import AuthContext
+import { useAuth } from "./context/AuthContext";
 
 function Navbar() {
-  const { user, logout } = useAuth(); // Destructure user and logout function
+  const { user, logout, loading } = useAuth();
+
+  // Show nothing until auth status is confirmed
+  if (loading) return null;
 
   return (
     <nav
@@ -20,8 +23,13 @@ function Navbar() {
     >
       <div className="container p-2">
         <Link className="navbar-brand" to="/">
-          <img src="media/images/logo.svg" alt="Logo" style={{ width: "25%" }} />
+          <img
+            src="media/images/logo.svg"
+            alt="Logo"
+            style={{ width: "25%" }}
+          />
         </Link>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -33,10 +41,11 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-lg-0 d-flex align-items-center">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/About">
+              <Link className="nav-link active" to="/About">
                 About
               </Link>
             </li>
@@ -65,19 +74,8 @@ function Navbar() {
               />
             </li>
 
-            {/* Conditional Rendering */}
+            {/* Conditional buttons */}
             {user ? (
-              <>
-                <li className="nav-item">
-                  <span className="nav-link">Hello, {user.username}</span>
-                </li>
-                <li className="nav-item">
-                  <button className="btn btn-outline-danger ms-2" onClick={logout}>
-                    Logout
-                  </button>
-                </li>
-              </>
-            ) : (
               <>
                 <li className="nav-item">
                   <Link className="nav-link" to="/signup">
@@ -90,6 +88,12 @@ function Navbar() {
                   </Link>
                 </li>
               </>
+            ) : (
+              <li className="nav-item">
+                <button className="btn btn-outline-danger" onClick={logout}>
+                  Logout
+                </button>
+              </li>
             )}
           </ul>
         </div>

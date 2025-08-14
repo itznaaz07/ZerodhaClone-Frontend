@@ -1,97 +1,60 @@
-
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "../signup/AuthForm.css";
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3002";
+import { useAuth } from "../../context/AuthContext";
+import "./login.css";
 
-const Login = () => {
-  const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState({
-    email: "",
-    password: "",
-  });
-  const { email, password } = inputValue;
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setInputValue({
-      ...inputValue,
-      [name]: value,
-    });
-  };
+function Login() {
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [popupMessage, setPopupMessage] = useState("");
 
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
-  const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-left",
-    });
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(
-        `${apiUrl}/login`,
-        {
-          ...inputValue,
-        },
-        { withCredentials: true }
-      );
-      console.log(data);
-      const { success, message } = data;
-      if (success) {
-        handleSuccess(message);
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      } else {
-        handleError(message);
-      }
-    } catch (error) {
-      console.log(error);
+    const { success, message } = await login({ email, password });
+
+    if (success) {
+      window.location.href = "https://zerodhaclone-dashboard-ka6o.onrender.com";
+    } else {
+      setPopupMessage(message || "Login failed");
     }
-    setInputValue({
-      ...inputValue,
-      email: "",
-      password: "",
-    });
   };
+
+  const closePopup = () => setPopupMessage("");
 
   return (
-    <div className="form_container">
-      <h2>Login Account</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Enter your email"
-            onChange={handleOnChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Enter your password"
-            onChange={handleOnChange}
-          />
-        </div>
-        <button type="submit">Submit</button>
-        <span>
-          Already have an account? <Link to={"/signup"}>Signup</Link>
-        </span>
+    <div className="logIn-container">
+      <h2>Log In</h2>
+      <form className="logIn-form" onSubmit={handleSubmit}>
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <label>Password:</label>
+        <input
+          value={password}
+          type="password"
+          required
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">Log In</button>
       </form>
-      <ToastContainer />
+
+      {popupMessage && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>{popupMessage}</p>
+            <button onClick={closePopup}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default Login;
