@@ -4,12 +4,12 @@ import { useAuth } from "./context/AuthContext";
 
 function Navbar() {
   const { user, logout, loading } = useAuth();
-
-  // Show nothing until auth status is confirmed
   if (loading) return null;
 
   return (
+    
     <nav
+    
       className="navbar navbar-expand-lg border-bottom"
       style={{
         backgroundColor: "#FFF",
@@ -21,6 +21,7 @@ function Navbar() {
         zIndex: 1000,
       }}
     >
+      
       <div className="container p-2">
         <Link className="navbar-brand" to="/">
           <img
@@ -65,7 +66,7 @@ function Navbar() {
               </Link>
             </li>
 
-            {/* Divider */}
+          
             <li className="nav-item d-flex align-items-center mx-2">
               <img
                 src="media/images/line.webp"
@@ -75,7 +76,7 @@ function Navbar() {
             </li>
 
             {/* Conditional buttons */}
-            {user ? (
+            {!user ? (
               <>
                 <li className="nav-item">
                   <Link className="nav-link" to="/signup">

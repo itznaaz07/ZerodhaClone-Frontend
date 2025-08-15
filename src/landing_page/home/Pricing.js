@@ -2,6 +2,7 @@ import React from 'react';
 
 
 function Pricing() {
+    
     return ( 
        <div className='container mb-5'>
         <div className='row'>
