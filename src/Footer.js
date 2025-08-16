@@ -27,33 +27,33 @@ function Footer() {
               <div className='col-1'></div>
                 <div className='col'>
                     <p style={{fontSize:'20px'}} >Company</p>
-                    <a href='' className='d-flex flex-column' >About</a><br/>
-                    <a href='' className='d-flex flex-column'>Philosophy</a><br/>
-                   <a href='' className='d-flex flex-column' >Press & media</a><br/>
-                    <a href='' className='d-flex flex-column' >Careers</a><br/>
-                    <a href='' className='d-flex flex-column'>Zerodha Cares (CSR)</a><br/>
-                    <a href='' className='d-flex flex-column'>Zerodha.tech</a><br/>
-                  <a href='' className='d-flex flex-column' >Open source</a><br/>
+                    <a href=' ' className='d-flex flex-column' >About</a><br/>
+                    <a href=' ' className='d-flex flex-column'>Philosophy</a><br/>
+                   <a href=' ' className='d-flex flex-column' >Press & media</a><br/>
+                    <a href=' ' className='d-flex flex-column' >Careers</a><br/>
+                    <a href=' ' className='d-flex flex-column'>Zerodha Cares (CSR)</a><br/>
+                    <a href=' ' className='d-flex flex-column'>Zerodha.tech</a><br/>
+                  <a href=' ' className='d-flex flex-column' >Open source</a><br/>
                 </div>
                 <div className='col'>
                      <p style={{fontSize:'20px'}} >Support</p>
-                      <a href='' className='d-flex flex-column' >Contact us</a><br/>
-                    <a href='' className='d-flex flex-column' >Support portal</a><br/>
-                   <a href='' className='d-flex flex-column'>How to file a complaint?</a><br/>
-                    <a href='' className='d-flex flex-column' >Status of your complaints</a><br/>
-                    <a href='' className='d-flex flex-column'>Bulletin</a><br/>
-                    <a href='' className='d-flex flex-column'>Circular</a><br/>
-                  <a href='' className='d-flex flex-column' >Z-Connect blog</a><br/>
-                  <a href='' className='d-flex flex-column'>Downloads</a><br/>
+                      <a href=' ' className='d-flex flex-column' >Contact us</a><br/>
+                    <a href=' ' className='d-flex flex-column' >Support portal</a><br/>
+                   <a href=' ' className='d-flex flex-column'>How to file a complaint?</a><br/>
+                    <a href=' ' className='d-flex flex-column' >Status of your complaints</a><br/>
+                    <a href=' ' className='d-flex flex-column'>Bulletin</a><br/>
+                    <a href=' ' className='d-flex flex-column'>Circular</a><br/>
+                  <a href=' ' className='d-flex flex-column' >Z-Connect blog</a><br/>
+                  <a href=' ' className='d-flex flex-column'>Downloads</a><br/>
               </div>
               <div className='col'>
                 <p style={{fontSize:'20px'}} >Account</p>
                  
-                 <a href='' className='d-flex flex-column' >Open demat account</a><br/>
-                    <a href='' className='d-flex flex-column' >Minor demat account</a><br/>
-                   <a href='' className='d-flex flex-column' >NRI demat account</a><br/>
-                    <a href='' className='d-flex flex-column' >Commodity</a><br/>
-                    <a href='' className='d-flex flex-column' >Fund transfer</a><br/>
+                 <a href=' ' className='d-flex flex-column' >Open demat account</a><br/>
+                    <a href=' ' className='d-flex flex-column' >Minor demat account</a><br/>
+                   <a href=' ' className='d-flex flex-column' >NRI demat account</a><br/>
+                    <a href=' ' className='d-flex flex-column' >Commodity</a><br/>
+                    <a href=' ' className='d-flex flex-column' >Fund transfer</a><br/>
                   
               </div>
             </div>
@@ -68,15 +68,15 @@ function Footer() {
 </p>
         </div>
        <div style={{marginLeft:'30px',justifyContent:'space-between'}} className='text-muted'>
-        <a href="#" style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>NSE</a>
-        <a href="#" style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>BSE</a>
-        <a href="#" style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>MCX</a>
-        <a href="#" style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>Terms & conditions</a>
-        <a  href="#" style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>Policies & procedures </a>
-        <a href="#" style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>Privacy policy </a>
-        <a href="#" style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>Disclosure </a>
-        <a href="#" style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>For investor's attention </a>
-        <a  href="#" style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>Investor charter</a>
+        <a href=" " style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>NSE</a>
+        <a href=" " style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>BSE</a>
+        <a href=" " style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>MCX</a>
+        <a href=" " style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>Terms & conditions</a>
+        <a  href=" " style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>Policies & procedures </a>
+        <a href=" " style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>Privacy policy </a>
+        <a href=" " style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>Disclosure </a>
+        <a href=" " style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>For investor's attention </a>
+        <a  href=" " style={{marginLeft:'20px',textDecoration:'none',color:'rgba(73,73,73,1)'}}>Investor charter</a>
 
        </div>
         </div>

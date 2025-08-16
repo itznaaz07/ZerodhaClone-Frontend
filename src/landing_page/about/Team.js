@@ -16,7 +16,7 @@ function Team() {
             src="media/images/nithinkamath.jpg"
             className="mb-3 "
             style={{ borderRadius: "100%", width: "50%" }}
-          />
+         alt="" />
           <h4>Nithin Kamath</h4>
           <h6>Founder, CEO</h6>
         </div>
@@ -33,7 +33,7 @@ function Team() {
           <p>Playing basketball is his zen.</p>
           <p>
             Connect on{" "}
-            <a href="" style={{ textDecoration: "none" }}>
+            <a href=" " style={{ textDecoration: "none" }}>
               Homepage
             </a>{" "}
             /{" "}
@@ -41,7 +41,7 @@ function Team() {
               TradingQnA
             </a>{" "}
             /{" "}
-            <a href="" style={{ textDecoration: "none" }}>
+            <a href=" " style={{ textDecoration: "none" }}>
               Twitter
             </a>
           </p>

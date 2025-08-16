@@ -27,13 +27,12 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
       }
     } catch (err) {
-      console.error("Check auth failed:", err.message);
+      console.error("Check auth failed:", err.response?.data?.message || err.message || err);
       setUser(null);
     } finally {
-      setLoading(false); // ✅ Always stop loading, even if request fails
+      setLoading(false);
     }
   };
-
   const login = async (data) => {
     try {
       const res = await axios.post(`${API}/api/login`, data, { withCredentials: true });
@@ -51,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (data) => {
     try {
-      const res = await axios.post(`${API}/api/signup`, data, { withCredentials: true });
+      const res = await axios.post(`${API}/signup`, data, { withCredentials: true });
       if (res.data.success) {
         setUser(res.data.user);
         localStorage.setItem("token", res.data.token || "");
