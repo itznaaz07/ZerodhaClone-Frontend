@@ -3,8 +3,6 @@
   import './index.css';
   import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-  import { AuthProvider } from './context/AuthContext'; // <-- import AuthProvider here
-
   import HomePage from './landing_page/home/Homepage';
   import AboutPage from './landing_page/about/Aboutpage';
   import Signup from './landing_page/signup/Signup.jsx';
@@ -18,9 +16,8 @@
 
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(
-    <AuthProvider>  
-
       <BrowserRouter>
+      
         <Navbar/>
         <Routes>
           <Route path='/' element={<HomePage />} />
@@ -33,6 +30,7 @@
           <Route path='*' element={<Notfound />} />
         </Routes>
         <Footer />
+        
       </BrowserRouter>
-    </AuthProvider>
+   
   );

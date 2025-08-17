@@ -40,7 +40,7 @@ function Productpage() {
         googlePlay=""
         appStore=""
       />
-      <h5 className="text-center text-muted mt-5">Want to know more about our technology stack? Check out the<a href=""> Zerodha.tech blog.</a></h5>
+      <h5 className="text-center text-muted mt-5">Want to know more about our technology stack? Check out the<a href=" " > Zerodha.tech blog.</a></h5>
       <Universe />
     </>
   );

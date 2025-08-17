@@ -1,48 +1,87 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./AuthForm.css";
+import React, { useState } from 'react';
+import './Signup.css';
+import axios from 'axios';
 
-const Signup = () => {
-  const [inputValue, setInputValue] = useState({ email: "", username: "", password: "" });
-  const { signup } = useAuth();
+function Signup() {
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [userExistance, setUserExistance] = useState(false);
 
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setInputValue(prev => ({ ...prev, [name]: value }));
-  };
+    const closePopup = () => {
+        setUserExistance(false);
+    };
 
-  const handleError = (msg) => toast.error(msg, { position: "bottom-left" });
-  const handleSuccess = (msg) => toast.success(msg, { position: "bottom-right" });
+    const handleSubmit = (event) => {
+        event.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, username, password } = inputValue;
-    if (!email || !username || !password) {
-      handleError("Please fill all fields");
-      return;
-    }
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/signUp`, {
+            email,
+            username,
+            password
+        })
+        .then((res) => {
+            if (res.status === 201) {
+                setTimeout(() => {
+                    window.location.href =  `${process.env.REACT_APP_DASHBOARD_URL}`;
+                }, 100);
+            } else if (res.status === 202) {
+                setUserExistance(true);
+            }
+        })
+        .catch((err) => {
+            console.error("Signup error:", err);
+        });
 
-    const res = await signup({ email, username, password });
-    if (res.success) handleSuccess("Signup successful!");
-    else handleError(res.message);
-  };
+        setEmail("");
+        setUsername("");
+        setPassword("");
+    };
 
-  return (
-    <div className="form_container">
-      <h2>Signup Account</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="Email" value={inputValue.email} onChange={handleOnChange} />
-        <input type="text" name="username" placeholder="Username" value={inputValue.username} onChange={handleOnChange} />
-        <input type="password" name="password" placeholder="Password" value={inputValue.password} onChange={handleOnChange} />
-        <button type="submit">Signup</button>
-        <span>Already have an account? <Link to="/login">Login</Link></span>
-      </form>
-      <ToastContainer />
-    </div>
-  );
-};
+    return ( 
+        <div className='signup-container' data-testid="signup-container">
+            <h2>Sign Up</h2>
+            <form className='signup-form' onSubmit={handleSubmit} >
+                <label htmlFor="email">Email:</label>
+                <input
+                    type='email'
+                    id='email'
+                    value={email}
+                    required
+                    onChange={(e)=> setEmail(e.target.value)}
+                />
+
+                <label htmlFor="username">Username:</label>
+                <input
+                    type='text'
+                    id='username'
+                    value={username}
+                    required
+                    onChange={(e)=> setUsername(e.target.value)}   
+                />
+
+                <label htmlFor='password'>Password:</label>
+                <input
+                    value={password}
+                    type='password'
+                    id='password'
+                    required
+                    onChange={(e)=> setPassword(e.target.value)}
+                />
+
+                <button data-testid="signupButton" type="submit">Sign Up</button>
+            </form>
+
+            {userExistance && 
+            <div className='popup'>
+                <div className='popup-content'>
+                    <p>The user already exists! Please Log in</p>
+                    <button onClick={closePopup}>Close</button>
+                </div>
+            </div>
+            }
+        </div>
+    );
+}
 
 export default Signup;

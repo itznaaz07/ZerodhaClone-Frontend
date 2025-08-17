@@ -1,55 +1,71 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import { useAuth } from "../../context/AuthContext";
-import "../signup/AuthForm.css";
 
-const Login = () => {
-  const navigate = useNavigate();
-  const { login } = useAuth();
-  const [inputValue, setInputValue] = useState({ email: "", password: "" });
-  const { email, password } = inputValue;
+import React from 'react';
+import './login.css';
+import {useState} from 'react';
+import axios from 'axios';
 
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setInputValue((prev) => ({ ...prev, [name]: value }));
-  };
 
-  const handleError = (msg) => toast.error(msg, { position: "bottom-left" });
-  const handleSuccess = (msg) => toast.success(msg, { position: "bottom-left" });
+function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [userExistance, setUserExistance] = useState(true);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email || !password) return handleError("Please fill all fields");
-
-    const res = await login({ email, password });
-    if (res.success) {
-      handleSuccess("Login successful");
-      setInputValue({ email: "", password: "" });
-      setTimeout(() => navigate("/"), 1000);
-    } else {
-      handleError(res.message);
+   
+    const handleSubmit = (event)=>{
+        
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/logIn`, {email, password})
+        .then( (res)=>{
+            //checks the status code. if 201, user is new and brings user in dashboard
+            if(res.status === 201){
+                setTimeout(()=>{
+                    window.location.href = process.env.REACT_APP_DASHBOARD_URL;
+                },100);
+                 }else if(res.status === 202){
+                setUserExistance(false);
+            }
+        })
+        event.preventDefault();
+        setEmail("");
+        setPassword("");
     }
-  };
 
-  return (
-    <div className="form_container">
-      <h2>Login Account</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
-          <input type="email" name="email" value={email} onChange={handleOnChange} placeholder="Enter your email" />
+    const closePopup = ()=>{
+        setUserExistance(true);
+    }
+
+    return ( 
+        <div className='logIn-container'>
+            <h2>Log In</h2>
+            <form className='logIn-form' onSubmit={handleSubmit}>
+                <label htmlFor="email">Email:</label>
+                <input
+                    type='email'
+                    id='email'
+                    value={email}
+                    required
+                    onChange={(e)=> setEmail(e.target.value)}
+                />
+
+                <label htmlFor='password'>Password:</label>
+                <input
+                    value={password}
+                    type='password'
+                    id='password'
+                    required
+                    onChange={(e)=> setPassword(e.target.value)}
+                />
+                <button type="submit">Log In</button>
+            </form>
+            { !userExistance && 
+            <div className='popup'>
+                <div className='popup-content'>
+                    <p>Incorrect password or email! Please try again.</p>
+                    <button onClick={closePopup}>Close</button>
+                </div>
+            </div>
+            }
         </div>
-        <div>
-          <label>Password</label>
-          <input type="password" name="password" value={password} onChange={handleOnChange} placeholder="Enter your password" />
-        </div>
-        <button type="submit">Login</button>
-        <span>Don't have an account? <Link to="/signup">Signup</Link></span>
-      </form>
-      <ToastContainer />
-    </div>
-  );
-};
+    );
+}
 
 export default Login;
