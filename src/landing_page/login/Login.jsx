@@ -13,12 +13,12 @@ function Login() {
    
     const handleSubmit = (event)=>{
         
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/logIn`, {email, password})
+        axios.post(`https://zerodhaclone-backend-1.onrender.com/logIn`, {email, password})
         .then( (res)=>{
             //checks the status code. if 201, user is new and brings user in dashboard
             if(res.status === 201){
                 setTimeout(()=>{
-                    window.location.href = ``http://localhost:3000/`;
+                    window.location.href = ``;
                 },100);
                  }else if(res.status === 202){
                 setUserExistance(false);
