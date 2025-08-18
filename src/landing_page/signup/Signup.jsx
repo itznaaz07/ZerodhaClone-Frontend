@@ -15,7 +15,7 @@ function Signup() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/signUp`, {
+        axios.post(`https://zerodhaclone-backend-1.onrender.com/signUp`, {
             email,
             username,
             password
@@ -23,7 +23,7 @@ function Signup() {
         .then((res) => {
             if (res.status === 201) {
                 setTimeout(() => {
-                    window.location.href =  `http://localhost:3000/`;
+                    window.location.href =  ``;
                 }, 100);
             } else if (res.status === 202) {
                 setUserExistance(true);
