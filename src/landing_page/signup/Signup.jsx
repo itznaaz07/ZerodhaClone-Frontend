@@ -23,7 +23,7 @@ function Signup() {
         .then((res) => {
             if (res.status === 201) {
                 setTimeout(() => {
-                    window.location.href =  `${process.env.REACT_APP_DASHBOARD_URL}`;
+                    window.location.href =  `http://localhost:3000/`;
                 }, 100);
             } else if (res.status === 202) {
                 setUserExistance(true);
