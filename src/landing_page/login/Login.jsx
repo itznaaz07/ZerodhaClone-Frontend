@@ -18,7 +18,7 @@ function Login() {
             //checks the status code. if 201, user is new and brings user in dashboard
             if(res.status === 201){
                 setTimeout(()=>{
-                    window.location.href = process.env.REACT_APP_DASHBOARD_URL;
+                    window.location.href = ``http://localhost:3000/`;
                 },100);
                  }else if(res.status === 202){
                 setUserExistance(false);
